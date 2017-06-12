@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>佳杰数据查询</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/toubu.css">
+</head>
+<body>
+<form id="login">
+    {% csrf_token %}
+    <h1>爬虫登录页面</h1>
+{#fieldset 元素可将表单内的相关元素分组#}
+    <form action="/loginziji/" method="post" autocomplete="off">
+<div class="">
+    <label>用&nbsp;户&nbsp;名</label>
+    <input name="username" id="nm" type="text" placeholder="请输入您的用户名" />
+</div>
+{#        hint：该提示会在输入字段为空时显示，并会在字段获得焦点时消失#}
+        <div class="">
+<label>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</label>
+            <input name="password" id="pd" type="password" placeholder="请输入您的密码" />
+        </div>
+        <input class="" id="dl" type="submit" value="立即登录 > " />
+                </form>
+    <p class="">没有帐号？<a href="register.html">[立即注册]</a></p>
+</form>
+</body>
+</html>
+

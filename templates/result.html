@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- 引入 ECharts 文件 -->
+    <script src="/static/js/echarts.js"></script>
+{#    <script src="echarts.min.js" charset = "utf-8"></script>#}
+    <script src="/static/js/china.js" charset ="utf-8"></script>
+<body>
+<div>
+{#    传入的值#}
+{{ location }}
+    {{ process }}
+    {{ text }}
+    {{ beijing }}
+</div>
+<div>
+  {% for xianshi in jieguo %}
+      <a href="{{xianshi.url}}"><{{ xianshi.title }} </a>
+      {{ xianshi.shijian }}
+      {{ xianshi.diming }}
+      <br>
+    {% endfor %}
+</div>
+    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="main" style="width: 900px;height:450px;"></div>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+{#        模板#}
+        var option = {
+            title:{
+                text: '数据展示',
+        left: 'center'},
+
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+        data:['标书信息'],
+            },
+{#            左侧显示高低框#}
+                visualMap: {
+                    min: 0,
+                    max: 300,
+                    color:['#ff3333', 'orange', 'white'],
+                    left: 'left',
+                    top: 'bottom',
+                    text: ['高', '低'],           // 文本，默认为数值文本
+                    calculable: true
+                },
+
+
+tooltip: {
+        trigger: 'item',
+
+
+    },
+{#            显示框#}
+
+            toolbox: {
+        show: true,
+        orient: 'vertical',
+        left: 'right',
+        top: 'center',
+        feature: {
+            dataView: {readOnly: false},
+            restore: {},
+            saveAsImage: {}
+        }
+    },
+    series: [
+        {
+            name: '标书信息',
+            type: 'map',
+            mapType: 'china',
+            selectedMode : 'multiple',
+            label: {
+                normal: {
+                    show: true
+                },
+                emphasis: {
+                    show: true
+                }
+            },
+            data:[
+                {name: '北京',value: {{ beijing }} },
+                {name: '天津',value: {{ tianjin }} },
+                {name: '上海',value: {{ shanghai }} },
+                {name: '重庆',value: {{ chongqing }} },
+                {name: '黑龙江',value: {{ heilongjiang }} },
+                {name: '吉林',value: {{ jilin }} },
+                {name: '辽宁',value: {{ liaoning }} },
+                {name: '河北',value: {{ hebei }} },
+                {name: '山西',value: {{ shanxi1 }} },
+                {name: '青海',value: {{ qinghai }} },
+                {name: '河南',value: {{ henan }} },
+                {name: '江苏',value: {{ jiangsu }} },
+                {name: '安徽',value: {{ anhui }} },
+                {name: '浙江',value: {{ zhejiang }} },
+                {name: '福建',value: {{ fujian }} },
+                {name: '江西',value: {{ jiangxi }} },
+                {name: '湖南',value: {{ hunan }} },
+                {name: '湖北',value: {{ hubei }} },
+                {name: '广东',value: {{ guangdong }} },
+                {name: '台湾',value: {{ taiwan }} },
+                {name: '海南',value: {{ hainan }} },
+                {name: '甘肃',value: {{ gansu }} },
+                {name: '陕西',value: {{ shanxi }} },
+                {name: '四川',value: {{ sichuan }} },
+                {name: '贵州',value: {{ guizhou }} },
+                {name: '云南',value: {{ yunnan }} },
+                {name: '山东',value: {{ shandong }} },
+                {name: '广西',value: {{ guangxi}} },
+                {name: '内蒙古',value: {{ neimenggu }} },
+                {name: '西藏',value: {{ xizang }} },
+                {name: '宁夏',value: {{ ningxia }} },
+                {name: '新疆',value: {{ xinjiang }} },
+
+
+            ]
+        }
+    ]
+};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+
+    </script>
+
+</body>
+</html>
+
+{#</body>#}
+{##}
+{#</head>#}
+{#</html>#}
+{#{% if not jieguo %}#}
+{#    {{ error }}#}
+{#{% endif %}#}
+{#{% if  jieguo %}#}
+{#    {% for xianshi in jieguo %}<tr>#}
+{#    <td ><a class="tablestyle" href="{{xianshi.url}}">{{ xianshi.title }} </a></td>#}
+{#    <td >{{ xianshi.shijian }}</td>#}
+{#    <td >{{ xianshi.diming }}</td>#}
+{#  </tr>#}
+{#{% endfor %}#}
+{#{% endif %}#}
